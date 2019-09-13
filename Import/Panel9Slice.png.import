@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Panel9Slice.png-70af5b593db4578cebfb1f688504f5e6.stex"
+path="res://.import/Panel9Slice.png-e0c7de67eefacd99a1e4677fc2af8b65.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Panel9Slice.png"
-dest_files=[ "res://.import/Panel9Slice.png-70af5b593db4578cebfb1f688504f5e6.stex" ]
+source_file="res://Import/Panel9Slice.png"
+dest_files=[ "res://.import/Panel9Slice.png-e0c7de67eefacd99a1e4677fc2af8b65.stex" ]
 
 [params]
 
