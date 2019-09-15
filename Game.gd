@@ -10,3 +10,7 @@ func _on_PersonalSpace_mouse_entered():
 func _on_InnerSpace_mouse_entered():
 	button.set_fearLevel(button.FEAR.anxious)
 	
+
+
+func _on_FreeMovementSpace_mouse_entered():
+	button.set_fearLevel(button.FEAR.calm)

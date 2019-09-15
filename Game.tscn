@@ -92,7 +92,7 @@ tracks/0/keys = {
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 83.0, 98.0 ],
+"_edit_horizontal_guides_": [ 83.0, 98.0, 37.0 ],
 "_edit_vertical_guides_": [ 97.0, 47.0 ]
 }
 
@@ -100,6 +100,13 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
+
+[node name="FreeMovementSpace" type="Control" parent="UI"]
+margin_right = 144.0
+margin_bottom = 37.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PersonalSpace" type="Control" parent="UI"]
 margin_top = 37.0
@@ -133,6 +140,7 @@ anims/agitated04 = SubResource( 4 )
 anims/agitated05 = SubResource( 5 )
 
 [node name="AnimationTimer" type="Timer" parent="UI/Button"]
+[connection signal="mouse_entered" from="UI/FreeMovementSpace" to="." method="_on_FreeMovementSpace_mouse_entered"]
 [connection signal="mouse_entered" from="UI/PersonalSpace" to="." method="_on_PersonalSpace_mouse_entered"]
 [connection signal="mouse_entered" from="UI/InnerSpace" to="." method="_on_InnerSpace_mouse_entered"]
 [connection signal="animation_finished" from="UI/Button/AnimationPlayer" to="UI/Button" method="_on_AnimationPlayer_animation_finished"]
