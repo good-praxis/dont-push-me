@@ -25,12 +25,12 @@ func set_fearLevel(newFearLevel):
 		
 		FEAR.anxious:
 			animationDelay = [0.2, 1]
-			animationSet = ["agitated01", "agitated02", "agitated03", "agitated04", "agitated05"]
+			animationSet = ["agitated02", "agitated03", "agitated04", "agitated05"]
 			
 			play_rand_animation()
 			
 		FEAR.agitated:
-			animationSet = ["agitated01", "agitated02", "agitated03", "agitated04", "agitated05"]
+			animationSet = ["agitated01", "agitated02"]
 			animationDelay = [1, 2]
 			if $AnimationTimer.time_left == 0:
 				play_rand_animation()
