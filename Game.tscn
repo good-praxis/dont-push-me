@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://default_theme.tres" type="Theme" id=2]
@@ -36,6 +36,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 47, 83 ), Vector2( 48, 83 ), Vector2( 47, 83 ), Vector2( 46.1486, 83.0406 ), Vector2( 48.1513, 83 ), Vector2( 47, 83 ), Vector2( 46.8653, 82.9451 ), Vector2( 46.1065, 82.9477 ), Vector2( 47.0851, 82.9451 ), Vector2( 48.541, 82.9176 ), Vector2( 47.0302, 82.8352 ), Vector2( 45.1623, 82.8352 ), Vector2( 46.7555, 82.8077 ), Vector2( 47.7719, 82.8077 ), Vector2( 46.6731, 82.6979 ), Vector2( 45.9589, 82.6704 ), Vector2( 46.5632, 82.6704 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle01"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 47.8672, 83 ) ]
 }
 
 [node name="Game" type="Node"]
@@ -84,6 +100,7 @@ script = ExtResource( 3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Button"]
 anims/agitated01 = SubResource( 1 )
 anims/agitated02 = SubResource( 6 )
+anims/idle01 = SubResource( 7 )
 [connection signal="mouse_entered" from="UI/FreeMovementSpace" to="." method="_on_FreeMovementSpace_mouse_entered"]
 [connection signal="mouse_entered" from="UI/PersonalSpace" to="." method="_on_PersonalSpace_mouse_entered"]
 [connection signal="mouse_entered" from="UI/InnerSpace" to="." method="_on_InnerSpace_mouse_entered"]

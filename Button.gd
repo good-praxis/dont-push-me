@@ -1,53 +1,72 @@
 extends Button
 
-enum FEAR{
-	calm,
-	agitated,
-	anxious,
-	panicking
+enum FEAR_INDEX {
+	calm = -1,
+	agitated = 30,
+	anxious = 70,
+	panicking = 90
 }
 
-var fearLevel = FEAR.calm setget set_fearLevel
+var fearLevel = 0
+var fearDpt = -0.2 setget set_fearZone
 
-var animationSet = []
+onready var animationPlayer = $AnimationPlayer
+
+var animationSet = ["idle01"]
 
 
-func set_fearLevel(newFearLevel):
-	fearLevel = newFearLevel
-	
-	#TODO: Expand to represent dynamic changes
-	match fearLevel:
+func set_fearZone(newFearZone):
+	match newFearZone:
 		
-		FEAR.calm:
-			animationSet = []
+		FEAR_INDEX.calm:
+			fearDpt = -0.2
 		
 		
-		FEAR.agitated:
-			$AnimationPlayer.playback_speed = 1
-			animationSet = ["agitated01", "agitated02"]
+		FEAR_INDEX.agitated:
+			fearDpt = 0.1
+			if fearLevel < 30:
+				fearLevel += 30
+
+			
+		FEAR_INDEX.anxious:
+			fearDpt = 0.3
+			if fearLevel < 70:
+				fearLevel = 70
 			
 			play_rand_animation()
 			
-		FEAR.anxious:
-			animationSet = ["agitated02", "agitated03", "agitated04", "agitated05"]
-			
-			$AnimationPlayer.playback_speed = 1.7
-			animationSet = ["agitated01", "agitated02"]
-			
-			play_rand_animation()
-			
-		FEAR.panicking:
-			animationSet = ["agitated02"]
-			$AnimationPlayer.playback_speed = 2.5
+		FEAR_INDEX.panicking:
+			fearDpt = 1
+			if fearLevel < 90:
+				fearLevel = 90
 			
 			play_rand_animation()
 			
 			
 func _on_AnimationPlayer_animation_finished(_anim_name):
+	
+	
+	animationPlayer.playback_speed = 1 # default
+	if fearLevel >= FEAR_INDEX.panicking:
+		animationSet = ["agitated02"]
+		animationPlayer.playback_speed = 2.5
+	elif fearLevel >= FEAR_INDEX.anxious:
+		animationSet = ["agitated01", "agitated02"]
+		animationPlayer.playback_process_mode = 1.7
+	elif fearLevel >= FEAR_INDEX.agitated:
+		animationSet = ["agitated01"]
+	else:
+		animationSet = ["idle01"]
+	
 	play_rand_animation()
+	fearLevel += fearDpt
+	normalizeFearLevel()
 
+
+
+
+func normalizeFearLevel():
+	fearLevel = fearLevel if fearLevel < 100 and fearLevel > 0 else 100 if fearLevel >= 100 else 0 
 
 func play_rand_animation():
-	if len(animationSet) == 0:
-		return
-	$AnimationPlayer.play(animationSet[randi()%len(animationSet)])
+	animationPlayer.play(animationSet[randi()%len(animationSet)])
