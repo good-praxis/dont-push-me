@@ -84,6 +84,8 @@ __meta__ = {
 
 [node name="DialogSFX" type="AudioStreamPlayer" parent="UI/DialogSystem"]
 
+[node name="PostMessageTimer" type="Timer" parent="UI/DialogSystem"]
+
 [node name="FreeMovementSpace" type="Control" parent="UI"]
 margin_right = 144.0
 margin_bottom = 37.0
