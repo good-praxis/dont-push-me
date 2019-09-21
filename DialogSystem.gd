@@ -2,8 +2,6 @@ extends Node
 
 onready var dialogBox = $DialogBox
 onready var sfx = $DialogSFX
-onready var delayTimer = $DelayTimer
-onready var postTimer = $PostMessageTimer
 
 var interupted = false
 var running = false
@@ -33,14 +31,11 @@ func play_dialog(text, delay=.8, postDelay=0, volume=-25, pitch=1.5):
 			continue
 			
 		sfx.play()
-		delayTimer.start(delay)
-			
-		#TODO: Play sound
-		yield(delayTimer, "timeout")
+		yield(get_tree().create_timer(delay), "timeout")
 		
 		if postDelay > 0:
-			postTimer.start(postDelay)
-			yield(postTimer, "timeout")
+			yield(get_tree().create_timer(postDelay), "timeout")
+
 		
 	running = false
 	if len(dialogQueue) > 0:
