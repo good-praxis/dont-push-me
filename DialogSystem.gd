@@ -11,12 +11,12 @@ var running = false
 var dialogQueue = []
 
 
-func play_dialog(text, volume, pitch, delay, postDelay = 0):
+func play_dialog(text, delay=.8, postDelay=0, volume=-25, pitch=1.5):
 	sfx.volume_db = volume
 	sfx.pitch_scale = pitch
 	
 	if running:
-		dialogQueue.append({"text": text, "volume": volume, "pitch": pitch, "delay": delay, "postDelay": postDelay})
+		dialogQueue.append({"text": text, "delay": delay,  "postDelay": postDelay, "volume": volume, "pitch": pitch})
 		return
 		
 	dialogBox.text = ""
@@ -29,9 +29,10 @@ func play_dialog(text, volume, pitch, delay, postDelay = 0):
 			
 			
 		dialogBox.text += character
-		if character in " .,'\"":
+		if character in " .,'\"!?":
 			continue
 			
+		sfx.play()
 		delayTimer.start(delay)
 			
 		#TODO: Play sound
@@ -45,7 +46,7 @@ func play_dialog(text, volume, pitch, delay, postDelay = 0):
 	if len(dialogQueue) > 0:
 		var qParams = dialogQueue[0]
 		dialogQueue.pop_front()
-		play_dialog(qParams.text, qParams.volume, qParams.pitch, qParams.delay, qParams.postDelay)
+		play_dialog(qParams.text, qParams.delay, qParams.postDelay, qParams.volume, qParams.pitch)
 		
 func interupt(with_empty_queue = false):
 	if with_empty_queue:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://default_theme.tres" type="Theme" id=2]
 [ext_resource path="res://DialogSystem.gd" type="Script" id=3]
-[ext_resource path="res://Button.gd" type="Script" id=4]
+[ext_resource path="res://Import/dialog.wav" type="AudioStream" id=4]
+[ext_resource path="res://Button.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "agitated01"
@@ -83,6 +84,7 @@ __meta__ = {
 [node name="DelayTimer" type="Timer" parent="UI/DialogSystem"]
 
 [node name="DialogSFX" type="AudioStreamPlayer" parent="UI/DialogSystem"]
+stream = ExtResource( 4 )
 
 [node name="PostMessageTimer" type="Timer" parent="UI/DialogSystem"]
 
@@ -115,7 +117,7 @@ margin_left = 47.8672
 margin_top = 83.0
 margin_right = 97.8672
 margin_bottom = 98.0
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Button"]
 anims/agitated01 = SubResource( 1 )
