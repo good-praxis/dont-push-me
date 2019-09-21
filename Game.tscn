@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://default_theme.tres" type="Theme" id=2]
-[ext_resource path="res://Button.gd" type="Script" id=3]
+[ext_resource path="res://DialogSystem.gd" type="Script" id=3]
+[ext_resource path="res://Button.gd" type="Script" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "agitated01"
@@ -21,7 +22,7 @@ tracks/0/keys = {
 "values": [ Vector2( 47, 83 ), Vector2( 48, 83 ), Vector2( 47, 83 ), Vector2( 47, 83 ), Vector2( 47, 83 ), Vector2( 48.6783, 83 ), Vector2( 46.8653, 82.9451 ), Vector2( 45.0524, 83.1099 ), Vector2( 47.0851, 82.9451 ), Vector2( 48.541, 82.9176 ), Vector2( 47.0302, 82.8352 ), Vector2( 45.1623, 82.8352 ), Vector2( 46.7555, 82.8077 ), Vector2( 47.7719, 82.8077 ), Vector2( 46.6731, 82.6979 ), Vector2( 45.9589, 82.6704 ), Vector2( 46.5632, 82.6704 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 resource_name = "agitated02"
 length = 0.35
 step = 0.05
@@ -38,7 +39,7 @@ tracks/0/keys = {
 "values": [ Vector2( 47, 83 ), Vector2( 48, 83 ), Vector2( 47, 83 ), Vector2( 46.1486, 83.0406 ), Vector2( 48.1513, 83 ), Vector2( 47, 83 ), Vector2( 46.8653, 82.9451 ), Vector2( 46.1065, 82.9477 ), Vector2( 47.0851, 82.9451 ), Vector2( 48.541, 82.9176 ), Vector2( 47.0302, 82.8352 ), Vector2( 45.1623, 82.8352 ), Vector2( 46.7555, 82.8077 ), Vector2( 47.7719, 82.8077 ), Vector2( 46.6731, 82.6979 ), Vector2( 45.9589, 82.6704 ), Vector2( 46.5632, 82.6704 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "idle01"
 length = 0.2
 tracks/0/type = "value"
@@ -65,6 +66,23 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
+
+[node name="DialogSystem" type="Node" parent="UI"]
+script = ExtResource( 3 )
+
+[node name="DialogBox" type="Label" parent="UI/DialogSystem"]
+margin_top = 55.0
+margin_right = 144.0
+margin_bottom = 75.0
+theme = ExtResource( 2 )
+autowrap = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DelayTimer" type="Timer" parent="UI/DialogSystem"]
+
+[node name="DialogSFX" type="AudioStreamPlayer" parent="UI/DialogSystem"]
 
 [node name="FreeMovementSpace" type="Control" parent="UI"]
 margin_right = 144.0
@@ -95,12 +113,12 @@ margin_left = 47.8672
 margin_top = 83.0
 margin_right = 97.8672
 margin_bottom = 98.0
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Button"]
 anims/agitated01 = SubResource( 1 )
-anims/agitated02 = SubResource( 6 )
-anims/idle01 = SubResource( 7 )
+anims/agitated02 = SubResource( 2 )
+anims/idle01 = SubResource( 3 )
 [connection signal="mouse_entered" from="UI/FreeMovementSpace" to="." method="_on_FreeMovementSpace_mouse_entered"]
 [connection signal="mouse_entered" from="UI/PersonalSpace" to="." method="_on_PersonalSpace_mouse_entered"]
 [connection signal="mouse_entered" from="UI/InnerSpace" to="." method="_on_InnerSpace_mouse_entered"]
