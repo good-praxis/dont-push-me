@@ -1,12 +1,12 @@
 extends Control
 
 var currentLine
-var interruptedLines = []
+var interuptedLines = []
 
-var interrupted = false
+var interupted = false
 
 var entry_point = load("res://dialog/Test1.tscn").instance()
-var interrupt_point = load("res://dialog/Test3.tscn")
+var interupt_point = load("res://dialog/Test3.tscn")
 
 func _ready():
 	currentLine = entry_point
@@ -14,14 +14,19 @@ func _ready():
 	add_child(currentLine)
 	currentLine.play()
 
-func interupt():
-	interrupted = true
+func interupt(clear_all = false, clear_interupts = true):
+	interupted = true
 	
 	currentLine.hide()
-	currentLine.interrupt()
-	interruptedLines.push_back(currentLine)
+	currentLine.interupt()
+	
+	if (clear_interupts and not currentLine.is_interupt) or not clear_interupts:
+		interuptedLines.push_back(currentLine)
+		
+	if clear_all:
+		interuptedLines = []
 
-	currentLine = interrupt_point.instance()
+	currentLine = interupt_point.instance()
 	currentLine.connect("finished", self, "_on_Line_finished")
 	add_child(currentLine)
 	currentLine.play()
@@ -40,9 +45,9 @@ func _on_Line_finished(nextLine = null, text = ""):
 		currentLine.connect("finished", self, "_on_Line_finished")
 		add_child(currentLine)
 		currentLine.play()
-	elif not nextLine and len(interruptedLines) > 0:
+	elif not nextLine and len(interuptedLines) > 0:
 		currentLine.queue_free()
-		currentLine = interruptedLines[-1]
-		interruptedLines.pop_back()
+		currentLine = interuptedLines[-1]
+		interuptedLines.pop_back()
 		currentLine.show()
 		currentLine.play()

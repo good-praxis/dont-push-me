@@ -2,16 +2,17 @@ extends Label
 
 export(String, FILE) var nextLine
 export(String, MULTILINE) var lineText
+export(bool) var is_interupt = false
 
 signal finished
 
-var interrupted = false
+var interupted = false
 
 func play():
-	interrupted = false
+	interupted = false
 	self.text = ""
 	for letter in lineText:
-		if interrupted:
+		if interupted:
 			break
 		if letter in " .,!?'\"" or !self.text:
 			self.text += letter
@@ -20,8 +21,8 @@ func play():
 		yield(get_tree().create_timer(0.05), "timeout")
 		self.text += letter
 	
-	if not interrupted:
+	if not interupted:
 		emit_signal("finished", nextLine, lineText)
 	
-func interrupt():
-	interrupted = true
+func interupt():
+	interupted = true

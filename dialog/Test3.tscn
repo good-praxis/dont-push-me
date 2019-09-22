@@ -14,3 +14,4 @@ __meta__ = {
 "_edit_lock_": true
 }
 lineText = "WE ALL FALL DOWN"
+is_interupt = true
