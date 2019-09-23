@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://dialog/_master/Line.gd" type="Script" id=2]
+
+[node name="Line" type="Label"]
+margin_top = 55.0
+margin_right = 144.0
+margin_bottom = 75.0
+theme = ExtResource( 1 )
+autowrap = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+lineText = "Thank you, I really appreciate it!"

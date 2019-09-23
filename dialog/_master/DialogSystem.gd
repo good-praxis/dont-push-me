@@ -5,16 +5,24 @@ var interuptedLines = []
 
 var interupted = false
 
-var entry_point = load("res://dialog/Test1.tscn").instance()
-var interupt_point = load("res://dialog/Test3.tscn")
-
-func _ready():
-	currentLine = entry_point
+func start(line_path):
+	currentLine = load(line_path).instance()
 	currentLine.connect("finished", self, "_on_Line_finished")
 	add_child(currentLine)
 	currentLine.play()
 
-func interupt(clear_all = false, clear_interupts = true):
+func interupt(interuption_path, clear_all = false, clear_interupts = true):
+	var interuptionLine = load(interuption_path).instance()
+	if not currentLine:
+		currentLine = interuptionLine
+		currentLine.connect("finished", self, "_on_Line_finished")
+		add_child(currentLine)
+		currentLine.play()
+		return
+		
+	if currentLine.same_as(interuptionLine):
+		return
+		
 	interupted = true
 	
 	currentLine.hide()
@@ -24,9 +32,11 @@ func interupt(clear_all = false, clear_interupts = true):
 		interuptedLines.push_back(currentLine)
 		
 	if clear_all:
+		for line in interuptedLines:
+			line.queue_free()
 		interuptedLines = []
 
-	currentLine = interupt_point.instance()
+	currentLine = interuptionLine
 	currentLine.connect("finished", self, "_on_Line_finished")
 	add_child(currentLine)
 	currentLine.play()
@@ -36,7 +46,7 @@ func interupt(clear_all = false, clear_interupts = true):
 func play_dialog(_one, _two):
 	pass
 	
-func _on_Line_finished(nextLine = null, text = ""):
+func _on_Line_finished(nextLine = null):
 	yield(get_tree().create_timer(1.5), "timeout")
 		
 	if currentLine.nextLine and nextLine == currentLine.nextLine:
@@ -51,3 +61,6 @@ func _on_Line_finished(nextLine = null, text = ""):
 		interuptedLines.pop_back()
 		currentLine.show()
 		currentLine.play()
+	else:
+		currentLine.queue_free()
+		currentLine = null

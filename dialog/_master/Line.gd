@@ -22,7 +22,13 @@ func play():
 		self.text += letter
 	
 	if not interupted:
-		emit_signal("finished", nextLine, lineText)
+		emit_signal("finished", nextLine)
 	
 func interupt():
 	interupted = true
+	
+func get_lineText():
+	return lineText
+	
+func same_as(other_line):
+	return self.lineText == other_line.get_lineText()

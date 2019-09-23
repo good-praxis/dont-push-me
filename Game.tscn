@@ -107,5 +107,6 @@ anims/idle01 = SubResource( 3 )
 [connection signal="mouse_entered" from="UI/FreeMovementSpace" to="." method="_on_FreeMovementSpace_mouse_entered"]
 [connection signal="mouse_entered" from="UI/PersonalSpace" to="." method="_on_PersonalSpace_mouse_entered"]
 [connection signal="mouse_entered" from="UI/InnerSpace" to="." method="_on_InnerSpace_mouse_entered"]
+[connection signal="isAnxious" from="UI/Button" to="." method="_on_Button_isAnxious"]
 [connection signal="mouse_entered" from="UI/Button" to="." method="_on_Button_mouse_entered"]
 [connection signal="animation_finished" from="UI/Button/AnimationPlayer" to="UI/Button" method="_on_AnimationPlayer_animation_finished"]
